@@ -1,26 +1,16 @@
 <template>
   <div id="app">
-    <div class="recipes" v-for="recipe in recipes" :key="recipe.idMeal">
-      <img :src="recipe.strMealThumb" :alt="recipe.strMeal" />
-      {{ recipe.strMeal }}
-    </div>
+    <NavBar />
+    <MainArea />
   </div>
 </template>
 
 <script>
+import NavBar from "@/components/NavBar/index.vue";
+import MainArea from "@/components/MainArea/index.vue";
 export default {
   name: "App",
-  components: {},
-  data() {
-    return {
-      recipes: null,
-    };
-  },
-  mounted() {
-    this.$axios
-      .get("https://www.themealdb.com/api/json/v1/1/search.php?s=Soup")
-      .then((response) => (this.recipes = response.data.meals));
-  },
+  components: { NavBar, MainArea },
 };
 </script>
 
@@ -31,6 +21,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
