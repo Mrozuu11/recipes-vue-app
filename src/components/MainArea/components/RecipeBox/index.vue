@@ -6,47 +6,50 @@
         :src="recipe.strMealThumb"
         :alt="recipe.strMeal"
       />
+      <FavouriteButton :meal-id="recipe.idMeal" />
       <div class="recipe__title">{{ recipe.strMeal }}</div>
     </div>
   </div>
 </template>
 
 <script>
+import FavouriteButton from "@/components/MainArea/components/RecipeBox/components/FavouriteButton/index.vue";
 export default {
   name: "RecipeBox",
-  data() {
-    return {
-      recipes: null,
-    };
+  props: {
+    recipes: {
+      required: true,
+    },
   },
-  mounted() {
-    this.$axios
-      .get("https://www.themealdb.com/api/json/v1/1/search.php?s=Soup")
-      .then((response) => (this.recipes = response.data.meals));
-  },
+  components: { FavouriteButton },
 };
 </script>
 
 <style lang="scss" scoped>
 .recipe-box {
+  padding: 3%;
+  width: 75%;
   display: grid;
-  grid-template-rows: repeat(auto-fill, minmax(120px, 1fr));
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  row-gap: 4vh;
+  grid-template-columns: repeat(auto-fill, minmax(285px, 1fr));
+  row-gap: 3vh;
   column-gap: 3vw;
 
   .recipe {
+    position: relative;
     border: solid 1px black;
     border-radius: 10px;
-    height: auto;
+    height: 290px;
 
     .recipe__img {
       width: 100%;
+      height: 80%;
+      object-fit: cover;
     }
 
     .recipe__title {
       padding: 1em;
       text-align: center;
+      text-transform: uppercase;
     }
   }
 }

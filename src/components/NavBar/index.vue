@@ -21,15 +21,14 @@ export default {
 
 <style lang="scss" scoped>
 .navbar {
-  padding: 1em 0;
+  padding: 1% 0;
   background: rgb(254, 255, 140);
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
 
   .navbar__btn {
-    padding: 1em;
+    padding: 0 2%;
     border: none;
     background: transparent;
     cursor: pointer;
@@ -38,10 +37,10 @@ export default {
   .navbar__components {
     width: 72%;
     display: flex;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
     gap: 3vw;
-    /* justify-content: space-between; */
     padding-right: 3%;
+    margin-left: auto;
   }
 }
 </style>

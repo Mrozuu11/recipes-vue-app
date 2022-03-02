@@ -3,13 +3,33 @@
     <div class="search-icon">
       <font-awesome-icon :icon="['fa', 'magnifying-glass']" size="lg" />
     </div>
-    <input class="searchbar__input" type="text" placeholder="SEARCH" />
+    <input
+      class="searchbar__input"
+      type="text"
+      placeholder="SEARCH"
+      v-model="query"
+    />
   </div>
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
 export default {
   name: "SearchBar",
+  methods: {
+    ...mapActions(["updateMealsQuery"]),
+  },
+  computed: {
+    ...mapGetters(["mealsQuery"]),
+    query: {
+      get() {
+        return this.mealsQuery;
+      },
+      set(newQuery) {
+        return this.updateMealsQuery(newQuery);
+      },
+    },
+  },
 };
 </script>
 
@@ -21,13 +41,14 @@ export default {
   display: flex;
   align-items: center;
   gap: 1em;
-  width: 62.5%;
+  width: 65%;
 
   .searchbar__input {
     background: inherit;
     border: none;
     outline: none;
     font-size: 14px;
+    width: 100%;
   }
 }
 </style>

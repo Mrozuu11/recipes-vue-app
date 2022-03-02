@@ -16,14 +16,17 @@ export default {
 <style lang="scss" scoped>
 .favbar {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  justify-content: space-around;
-  gap: 5em;
-  width: 20%;
+  width: 29%;
   border: solid 0.5px black;
   border-radius: 9px;
-  padding: 1em 0;
-  padding-left: 10%;
+  padding: 1em;
   font-size: 14px;
+
+  .favbar__text,
+  .favbar__btn {
+    margin-left: auto;
+  }
 }
 </style>
