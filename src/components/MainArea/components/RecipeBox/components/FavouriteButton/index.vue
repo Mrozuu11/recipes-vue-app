@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from "vuex";
 export default {
   name: "FavouriteButton",
   props: {
@@ -18,38 +19,26 @@ export default {
       required: true,
     },
   },
-  data() {
-    return {
-      isAddedToFavourite: false,
-    };
-  },
   methods: {
+    ...mapActions(["updateFavourites"]),
     handleAddToFavourite() {
-      const favourites = JSON.parse(localStorage.favourites);
-      if (favourites.includes(this.mealId)) {
-        this.isAddedToFavourite = false;
-        localStorage.favourites = JSON.stringify(
-          favourites.filter(
+      if (this.favourites.includes(this.mealId)) {
+        this.updateFavourites(
+          this.favourites.filter(
             (favouriteMealId) => favouriteMealId !== this.mealId
           )
         );
       } else {
-        this.isAddedToFavourite = true;
-        localStorage.favourites = JSON.stringify([...favourites, this.mealId]);
+        this.updateFavourites([...this.favourites, this.mealId]);
       }
     },
   },
-  mounted() {
-    this.isAddedToFavourite = JSON.parse(localStorage.favourites).includes(
-      this.mealId
-    );
-  },
-  /* computed: {
+  computed: {
+    ...mapGetters(["favourites"]),
     isAddedToFavourite() {
-      const favourites = JSON.parse(localStorage.favourites);
-      return favourites.includes(this.mealId);
+      return this.favourites.includes(this.mealId);
     },
-  }, */
+  },
 };
 </script>
 

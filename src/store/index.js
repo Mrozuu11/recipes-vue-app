@@ -1,8 +1,13 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import httpClient from "@/api/httpClient.js";
+import VuexPersistence from "vuex-persist";
 
 Vue.use(Vuex);
+
+const vuexLocal = new VuexPersistence({
+  storage: window.localStorage,
+});
 
 const state = {
   fetchedMeals: {
@@ -16,6 +21,7 @@ const state = {
   selectedCategories: [],
   selectedAreas: [],
   selectedTags: [],
+  favourites: [],
 };
 
 const getters = {
@@ -33,6 +39,9 @@ const getters = {
   },
   selectedTags: (state) => {
     return state.selectedTags;
+  },
+  favourites: (state) => {
+    return state.favourites;
   },
 };
 
@@ -70,6 +79,9 @@ const mutations = {
   UPDATE_SELECTED_TAGS(state, payload) {
     state.selectedTags = payload;
   },
+  UPDATE_FAVOURITES(state, payload) {
+    state.favourites = payload;
+  },
 };
 
 const actions = {
@@ -97,6 +109,9 @@ const actions = {
   updateSelectedTags: ({ commit }, payload) => {
     commit("UPDATE_SELECTED_TAGS", payload);
   },
+  updateFavourites: ({ commit }, payload) => {
+    commit("UPDATE_FAVOURITES", payload);
+  },
 };
 
 export default new Vuex.Store({
@@ -104,4 +119,5 @@ export default new Vuex.Store({
   getters,
   mutations,
   actions,
+  plugins: [vuexLocal.plugin],
 });

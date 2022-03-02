@@ -1,5 +1,11 @@
 <template>
-  <div class="favbar">
+  <!-- v-if expanded -> expand the favourites list (absoulte position), on click -> querysearch = strMeal + reset all filters-->
+  <div
+    class="favbar"
+    @mouseover="expanded = true"
+    @mouseleave="expanded = false"
+  >
+    {{ expanded }}
     <div class="favbar__text">FAVOURITES</div>
     <div class="favbar__btn">
       <font-awesome-icon :icon="['far', 'heart']" size="2x" />
@@ -10,6 +16,11 @@
 <script>
 export default {
   name: "FavouritesBar",
+  data() {
+    return {
+      expanded: false,
+    };
+  },
 };
 </script>
 

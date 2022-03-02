@@ -68,9 +68,6 @@ export default {
   },
   async mounted() {
     await this.fetchMeals();
-    if (!localStorage.favourites) {
-      localStorage.favourites = "[]";
-    }
   },
 };
 </script>
