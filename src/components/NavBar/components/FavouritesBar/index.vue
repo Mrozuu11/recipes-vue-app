@@ -1,5 +1,4 @@
 <template>
-  <!-- v-if expanded -> expand the favourites list (absoulte position), on click -> querysearch = strMeal + reset all filters-->
   <div
     :class="['favbar', expanded && checkFavourites ? 'expanded' : '']"
     @mouseover="expanded = true"

@@ -67,7 +67,7 @@ export default {
     expandedRecipeId(expandedRecipeId) {
       if (expandedRecipeId) {
         this.$nextTick(function () {
-          this.elementHeight = this.$refs.recipeDropdown[0].clientHeight + 20;
+          this.elementHeight = this.$refs.recipeDropdown[0].clientHeight + 40;
         });
       } else {
         this.elementHeight = 0;
@@ -80,6 +80,11 @@ export default {
 <style lang="scss" scoped>
 .recipe-box {
   position: relative;
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  transform: translate(0);
   padding: 3%;
   width: 75%;
   display: grid;
@@ -95,7 +100,7 @@ export default {
     opacity: 0.5;
   }
   .recipe {
-    /* position: relative; */
+    position: relative;
     border: solid 1px black;
     border-radius: 10px;
     height: 290px;

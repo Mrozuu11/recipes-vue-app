@@ -15,10 +15,10 @@
         <h3 class="header">Instruction</h3>
         <div class="text">{{ recipe.strInstructions }}</div>
       </div>
-      <div class="recipe-manual__ingredients">
+      <!--  <div class="recipe-manual__ingredients">
         <h3 class="header">Ingredients + Measure</h3>
         <div class="text">{{ recipe.strInstructions }}</div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -40,18 +40,16 @@ export default {
 </script>
 <style lang="scss" scoped>
 .expanded-recipe {
-  position: absolute;
-  width: 70.5vw;
-  top: 100%;
-  left: 0;
-  right: 0;
-  margin: 25px 0;
+  position: fixed;
+  width: 92%;
+  left: 4%;
+  margin: 35px 0;
+  min-height: 350px;
   max-height: 350px;
   border: 0.5px solid black;
   border-radius: 8px;
   display: flex;
   z-index: 1;
-  /* flex-wrap: wrap; */
 
   .video-container {
     .recipe-video {
@@ -62,7 +60,7 @@ export default {
   .recipe-manual {
     overflow: scroll;
     margin-left: auto;
-    padding: 0 25px;
+    padding: 25px 50px;
     text-align: left;
   }
   .recipe-manual::-webkit-scrollbar {
