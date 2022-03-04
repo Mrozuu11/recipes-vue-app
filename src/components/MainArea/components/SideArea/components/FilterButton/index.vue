@@ -1,5 +1,6 @@
 <template>
   <button class="filter-btn" @click="handleClick">
+    <font-awesome-icon :icon="['fa', 'xmark']" size="lg" class="icon" />
     {{ label }}
   </button>
 </template>
@@ -24,11 +25,16 @@ export default {
 
 <style lang="scss" scoped>
 .filter-btn {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
   margin: 5px;
   background: white;
-  border-radius: 6px;
+  border-radius: 8px;
   text-transform: uppercase;
   font-size: 14px;
-  padding: 5px 10px;
+  padding: 7px 14px;
+
+  .icon {
+    margin-right: 5px;
+  }
 }
 </style>

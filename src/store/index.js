@@ -22,6 +22,7 @@ const state = {
   selectedAreas: [],
   selectedTags: [],
   favourites: [],
+  expandedRecipeId: null,
 };
 
 const getters = {
@@ -42,6 +43,9 @@ const getters = {
   },
   favourites: (state) => {
     return state.favourites;
+  },
+  expandedRecipeId: (state) => {
+    return state.expandedRecipeId;
   },
 };
 
@@ -82,6 +86,9 @@ const mutations = {
   UPDATE_FAVOURITES(state, payload) {
     state.favourites = payload;
   },
+  SET_EXPANDED_RECIPE_ID(state, payload) {
+    state.expandedRecipeId = payload;
+  },
 };
 
 const actions = {
@@ -111,6 +118,9 @@ const actions = {
   },
   updateFavourites: ({ commit }, payload) => {
     commit("UPDATE_FAVOURITES", payload);
+  },
+  setExpandedRecipeId: ({ commit }, payload) => {
+    commit("SET_EXPANDED_RECIPE_ID", payload);
   },
 };
 

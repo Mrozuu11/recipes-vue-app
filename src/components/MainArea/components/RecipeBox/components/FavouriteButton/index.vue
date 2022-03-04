@@ -14,29 +14,29 @@ import { mapActions, mapGetters } from "vuex";
 export default {
   name: "FavouriteButton",
   props: {
-    mealId: {
-      type: String,
+    recipe: {
+      type: Object,
       required: true,
     },
   },
   methods: {
     ...mapActions(["updateFavourites"]),
     handleAddToFavourite() {
-      if (this.favourites.includes(this.mealId)) {
-        this.updateFavourites(
-          this.favourites.filter(
-            (favouriteMealId) => favouriteMealId !== this.mealId
-          )
-        );
+      if (this.favourites.some((meal) => meal.idMeal === this.recipe.idMeal)) {
+        this.updateFavourites([
+          ...this.favourites.filter(
+            (favouriteMeal) => favouriteMeal.idMeal !== this.recipe.idMeal
+          ),
+        ]);
       } else {
-        this.updateFavourites([...this.favourites, this.mealId]);
+        this.updateFavourites([...this.favourites, this.recipe]);
       }
     },
   },
   computed: {
     ...mapGetters(["favourites"]),
     isAddedToFavourite() {
-      return this.favourites.includes(this.mealId);
+      return this.favourites.some((meal) => meal.idMeal === this.recipe.idMeal);
     },
   },
 };

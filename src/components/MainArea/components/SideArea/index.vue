@@ -116,7 +116,7 @@ export default {
 
     .box {
       width: 100%;
-      height: 150px;
+      min-height: 150px;
       border: solid 1px black;
       border-radius: 10px;
     }

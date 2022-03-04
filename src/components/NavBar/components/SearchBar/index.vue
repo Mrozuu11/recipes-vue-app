@@ -5,7 +5,7 @@
     </div>
     <input
       class="searchbar__input"
-      type="text"
+      type="search"
       placeholder="SEARCH"
       v-model="query"
     />
@@ -20,12 +20,20 @@ export default {
     ...mapActions(["updateMealsQuery"]),
   },
   computed: {
-    ...mapGetters(["mealsQuery"]),
+    ...mapGetters([
+      "mealsQuery",
+      "selectedCategories",
+      "selectedAreas",
+      "selectedTags",
+    ]),
     query: {
       get() {
         return this.mealsQuery;
       },
       set(newQuery) {
+        this.selectedCategories.length = 0;
+        this.selectedAreas.length = 0;
+        this.selectedTags.length = 0;
         return this.updateMealsQuery(newQuery);
       },
     },

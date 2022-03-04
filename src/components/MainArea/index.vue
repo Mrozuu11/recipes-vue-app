@@ -24,6 +24,7 @@ export default {
       "selectedCategories",
       "selectedAreas",
       "selectedTags",
+      "favourites",
     ]),
     queriedMeals() {
       if (

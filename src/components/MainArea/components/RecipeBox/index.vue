@@ -1,19 +1,47 @@
 <template>
   <div class="recipe-box">
-    <div class="recipe" v-for="recipe in recipes" :key="recipe.idMeal">
+    <div
+      :style="
+        isRecipeClicked(recipe) ? `margin-bottom: ${elementHeight}px` : ''
+      "
+      :class="[
+        'recipe',
+        isRecipeClicked(recipe) ? 'opacity-regular' : 'opacity-low',
+      ]"
+      v-for="recipe in recipes"
+      :key="recipe.idMeal"
+    >
       <img
         class="recipe__img"
         :src="recipe.strMealThumb"
         :alt="recipe.strMeal"
       />
-      <FavouriteButton :meal-id="recipe.idMeal" />
-      <div class="recipe__title">{{ recipe.strMeal }}</div>
+      <FavouriteButton :recipe="recipe" />
+      <div
+        class="recipe__title"
+        @click="
+          setExpandedRecipeId(
+            recipe.idMeal === expandedRecipeId ? null : recipe.idMeal
+          );
+          toggleOpacity();
+        "
+      >
+        {{ recipe.strMeal }}
+      </div>
+
+      <RecipeDropdown
+        v-if="isRecipeClicked(recipe)"
+        :recipe="recipe"
+        ref="recipeDropdown"
+      />
     </div>
   </div>
 </template>
 
 <script>
 import FavouriteButton from "@/components/MainArea/components/RecipeBox/components/FavouriteButton/index.vue";
+import RecipeDropdown from "@/components/MainArea/components/RecipeDropdown/index.vue";
+import { mapActions, mapGetters } from "vuex";
 export default {
   name: "RecipeBox",
   props: {
@@ -21,12 +49,45 @@ export default {
       required: true,
     },
   },
-  components: { FavouriteButton },
+  components: { FavouriteButton, RecipeDropdown },
+  data() {
+    return {
+      elementHeight: 0,
+      opacity: false,
+    };
+  },
+  methods: {
+    ...mapActions(["setExpandedRecipeId"]),
+    isRecipeClicked(recipe) {
+      if (this.expandedRecipeId === recipe.idMeal) {
+        return true;
+      }
+      return false;
+    },
+    toggleOpacity() {
+      this.opacity = !this.opacity;
+    },
+  },
+  computed: {
+    ...mapGetters(["expandedRecipeId"]),
+  },
+  watch: {
+    expandedRecipeId(expandedRecipeId) {
+      if (expandedRecipeId) {
+        this.$nextTick(function () {
+          this.elementHeight = this.$refs.recipeDropdown[0].clientHeight + 20;
+        });
+      } else {
+        this.elementHeight = 0;
+      }
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 .recipe-box {
+  position: relative;
   padding: 3%;
   width: 75%;
   display: grid;
@@ -34,6 +95,13 @@ export default {
   row-gap: 3vh;
   column-gap: 3vw;
 
+  .opacity-regular {
+    opacity: 1;
+  }
+
+  .opacity-low {
+    opacity: 0.5;
+  }
   .recipe {
     position: relative;
     border: solid 1px black;
@@ -50,6 +118,7 @@ export default {
       padding: 1em;
       text-align: center;
       text-transform: uppercase;
+      cursor: pointer;
     }
   }
 }
