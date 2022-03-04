@@ -4,10 +4,7 @@
       :style="
         isRecipeClicked(recipe) ? `margin-bottom: ${elementHeight}px` : ''
       "
-      :class="[
-        'recipe',
-        isRecipeClicked(recipe) ? 'opacity-regular' : 'opacity-low',
-      ]"
+      class="recipe"
       v-for="recipe in recipes"
       :key="recipe.idMeal"
     >
@@ -22,8 +19,7 @@
         @click="
           setExpandedRecipeId(
             recipe.idMeal === expandedRecipeId ? null : recipe.idMeal
-          );
-          toggleOpacity();
+          )
         "
       >
         {{ recipe.strMeal }}
@@ -53,7 +49,6 @@ export default {
   data() {
     return {
       elementHeight: 0,
-      opacity: false,
     };
   },
   methods: {
@@ -63,9 +58,6 @@ export default {
         return true;
       }
       return false;
-    },
-    toggleOpacity() {
-      this.opacity = !this.opacity;
     },
   },
   computed: {
@@ -103,7 +95,7 @@ export default {
     opacity: 0.5;
   }
   .recipe {
-    position: relative;
+    /* position: relative; */
     border: solid 1px black;
     border-radius: 10px;
     height: 290px;
