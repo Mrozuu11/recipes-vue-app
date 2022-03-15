@@ -5,6 +5,7 @@ The app accesses assets from the REST API and utilizes local storage. The main f
 
 Stack:
 Vue.Js 
+Vuex
 SCSS
 Axios (Accessing the REST API)
 Vue Persist (Local storage handling)
